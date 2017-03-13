@@ -1,9 +1,203 @@
 FORMAT: 1A
 HOST: http://polls.apiblueprint.org/
 
-# mealplans
+# MealPlans
 
-Polls is a simple API allowing consumers to view polls and vote in them.
+This is a first version of API, related to recipe service project.
+
+As example, this is few of similar project descriptions, that this API must cover:
+* "No More To-Go website provides useful meal planning information through a combination of services, including: weekly menus, healthy recipes, integrated grocery shopping lists, cooking tips, specialty diets."
+* "FIVE COMPLETE HEALTHY MENUS. Each Friday you will receive an email with the following week's menu, recipes, photos of each dish, and an organized grocery list. WEEKLY GROCERY LISTS. A printable detailed grocery list in your phone or tablet."
+
+Basically, this services give you a weekly menu plan(list or recipes for each weekday).
+Each recipe have similar web-recipe structure - image, description, directions, ingredients.
+Combined in a weekly menu, this recipes can generate a grocery list, with all items, from selected recipes.
+
+
+
+## Weekly Menu
+admin version
+Gluthen free
+Diets
+Allergies
+Liked
+Pantry
+For kids
+Favourites
+Cooking for two / other custom meal plan
+Recipe by weekday
+Vegan
+
+Short information
+Custom
+Get collections
+
+
+## Auth
+
+## Recipe Calendar
+Current week
+Current
+Previous week
+Next week (is available)
+
+
+
+## Recipe
+fav
+meal done
+full
+short
+ingredients
+directions
+meta
+tags
+categories
+cuisines
+complex
+simple
+rating / rate
+change serving
+
+## Grocery List
+Directives
+All
+Add
+Edit
+Purchased
+Purchase
+Price
+How much spend now
+previous purchased items  + edit prev
+
+
+
+## Expenses
+
+## Nutrition
+
+## Food Tracking
+
+## Search
+By Ingredient
+By Name
+By easy
+By cousin
+
+## Tips
+
+## Logs
+
+
+names for items
+cup/cups/teaspoon
+
+## User
+profile
+like/fav/meal done
+purchase history
+
+## Gift sertificate
+
+## Checkout
+
+
+
+recipe
+/edit
+/delete
+/add
+/is complex
+/recipeIdByWeekday
+/nutrition
+/change image
+
+/:id
+/directions
+
+/directions/complex
+
+/ingredients
+/ingredients/categorized
+
+
+/meta
+prep
+cook
+serving
+
+/mealdone/:id
+/add
+/delete
+/list  - return recipe ids only
+
+
+favorite
+/add
+/:id
+/delete
+/list  - return recipe ids only
+
+
+weekly menu
+ /recipe/edit
+ /recipe/delete
+ /recipe/add
+
+
+
+getRecipe - json array with one recipe
+getDirections
+getIngredients
+getCategorizedIngredients
+
+Meta:
+prep
+cook
+serving
+mealDone
+favorites
+getMeta
+
+
+isComplexRecipe - это 
+getRecipeId by weekday
+
+
+
+MealDone:
+/add
+/remove
+/all - return recipe ids
+
+/current week -  return recipe ids 
+
+/previous week - return recipe ids 
+
+all weeks - return recipe ids
+
+
+get recipes per week
+
+
+menu/ingredients/categories/yes
+menu/ingredients/categories/no - or menu/ingredients/
+
+menu/ingredients/category/all - get all ingredients from weeklymenu, separated by categories
+menu/ingredients/category/id - get list of ingredients from one category (Note: without callculation
+
+menu/ingredients/category/id/compress - get list of ingredients from one category calculated
+
+GL / ing / cat / id / - get list of ingredients from one category with statuses 'purchased', 'to buy'
+
+menu/ingredients/category/all/raw 
+
+
+
+
+
+
+
 
 ## Questions Collection [/questions]
 
