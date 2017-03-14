@@ -194,8 +194,63 @@ menu/ingredients/category/all/raw
 
 
 
+## Authentification [/authentication]
+
+## Login [/login]
+
+[{
+    "success" : false,
+    "message" : "Authentification failed"
+}]
+
+[{
+    success: true,
+    message: 'Enjoy your token!',
+    token: token
+}]
+
+Status 303
+[{ 
+    success: false, 
+    message: 'No token provided.' 
+}]
 
 
+Stealed from BigOven API
+
+Authentication Process
+SSL is now required for all requests to the BigOven API. So precede your requested endpoint with "https://api2.bigoven.com"
+
+Pass your API Key with Every Request
+You'll be passing your API key, issued to you when you're approved to use the API, with every request, as the parameter api_key, or if you'd prefer, via the request header with a key named "X-BigOven-API-Key".
+
+In addition, if you'd like to do things at the BigOven.com user level, like see your favorites or post a review on behalf of a user, you'll need to pass authentication information for that BigOven user. That's different than your api_key; it's an encoded version of the user account information that you'll need to put in the request header.
+
+The authentication process for this user-level part of the BigOven API is based on the HTTP Basic Access Authentication method defined by RFC 1945 (Hypertext Transfer Protocol – HTTP/1.0).
+
+Required Steps
+Every API call that requires user level permissions must be made with a correctly set HTTP “Authorization” header. This header presents the user’s credentials to the api.bigoven.com server in Base64 format which can then be decoded by BigOven for verification. 
+
+The following template demonstrates the process of generating the Authorization header for a given username and password combination. This simple example, taken from RFC 1945, considers a username “Aladdin” with the password “open sesame”.
+
+"Step" "Field" "Value"
+1 Username "Aladdin"
+2 Password "open sesame"
+3 Combined String "Alladin:open sesame"
+4 Base64 Encoded Combined "QWxhZGRpbjpvcGVuIHNlc2FtZQ=="
+5 Authorization header "Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ=="
+    
+
+
+A complete sample request would then take the form
+GET /private/index.html HTTP/1.0
+Host: localhost
+Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==
+Fortunately for the API Client, most languages make both Base64 encoding and setting the Authorization header on a request a trivial process.
+Pass Authentication Information using the Authorization Request Header
+It is worth noting that not every API call requires the Authorization header to be set. BigOven public data may be requested without user credentials.
+
+Generally, you'll want to pass authentication information to api2.bigoven.com whenever you're doing something on the user's behalf, like posting a review, or fetching the profile of the currently logged in user. General operations, like searching recipes, don't require user-level authentication. Remember that the user information you're passing isn't your user information as a developer, it's that of the user, which you collect in a login dialog and then Base64-it as above to pass to BigOven.com for authentication.
 
 
 
