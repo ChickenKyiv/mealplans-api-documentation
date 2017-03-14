@@ -15,7 +15,7 @@ Combined in a weekly menu, this recipes can generate a grocery list, with all it
 
 
 
-## Weekly Menu
+# Group Weekly Menu
 admin version
 Gluthen free
 Diets
@@ -33,98 +33,213 @@ Custom
 Get collections
 
 
-## Auth
+# Group Auth
 
-## Recipe Calendar
+
+
+
+
+# Group Recipe
+
+### Retrieve Recipe [/authentication/{recipe_id}] 
+
++ Response 200 (application/json)
+
+        [
+            {
+                "fav"         : "",
+                "meal done"   : "",
+                "full"        : "",
+                "short"       : "",
+                "ingredients" : "",
+                "directions"  : "",
+                "meta"        : "",
+                "tags"        : "",
+                "categories"  : "",
+                "cuisines"    : "",
+                "complex"     : "",
+                "simple"      : "",
+                "rating / rate"  : "",
+                "change serving" : "",                
+            }
+        ]
+
+
+### Retrieve Recipe  [GET]
+
++ Response 200 (application/json)
+
+        [
+            {
+                "success"  : true,
+                
+            }
+        ]
+
+### Is Complex Recipe  [/recipe/{recipe_id}/is_complex]
+
++ Response 200 (application/json)
+
+        [
+            {
+                "is_"  : true,
+                
+            }
+        ]
+
+
+
+
+### Update Recipe  [POST]  
++ /edit
++ Response 200 (application/json)
+
+        [
+            {
+                "success"  : true,
+                
+            }
+        ]
+
+
+
+### Create Recipe  [POST] 
+/add
++ Response 200 (application/json)
+
+        [
+            {
+                "id"  : recipe_id,
+                
+            }
+        ]
+
+
+
+
+
+/recipeIdByWeekday - maybe this is belong more to weekly menu
+
+/nutrition
+
+/change image only
+
+### Delete [DELETE]
++ /delete
++ Response 204
+
+### Recipe Directions  [GET]
+/directions
+
+### Recipe Directions Complex  [GET]
+/directions/complex
+
+### Recipe Ingredients  [GET]
+/ingredients
+
+### Recipe Ingredients Categorized [GET]
+/ingredients/categorized
+
+
+
+### Recipe Meta [GET]
+/meta
++ Response 200 (application/json)
+
+        [
+            {
+                "prep"    : "",
+                "cook"    : "",
+                "serving" : "",
+                
+            }
+        ]
+
+
+
+
+
+
+
+
+
+
+# Group Grocery List
+
+## Directives
+## All
+## Add
+## Edit
+## Purchased
+## Purchase
+## Price
+## How much spend now
+## Previous purchased items  + edit prev
+
+# Group Recipe Calendar
+
+All data in recipe calendar are related to Grocery list, so maybe it will be better to move it on appropriate secion
+
 Current week
 Current
 Previous week
 Next week (is available)
 
 
+# Group Expenses
 
-## Recipe
-fav
-meal done
-full
-short
-ingredients
-directions
-meta
-tags
-categories
-cuisines
-complex
-simple
-rating / rate
-change serving
+Will be empty for alpha version of api
 
-## Grocery List
-Directives
-All
-Add
-Edit
-Purchased
-Purchase
-Price
-How much spend now
-previous purchased items  + edit prev
+# Group Nutrition
 
 
+# Group Food Tracking
+Will be empty for alpha version of api
 
-## Expenses
-
-## Nutrition
-
-## Food Tracking
-
-## Search
+# Group Search
 By Ingredient
 By Name
 By easy
 By cousin
 
-## Tips
+# Group Tips
+Will be empty for alpha version of api
 
-## Logs
-
+# Group Logs
+Will be empty for alpha version of api
 
 names for items
 cup/cups/teaspoon
 
-## User
+# Group User
 profile
 like/fav/meal done
 purchase history
 
-## Gift sertificate
+# Group Gift certificate
+Will be empty for alpha version of api
+Allowing user to pay for subscription but not
+Might works as same as coupons, but with price going to 0.
+Problem of gift certificate is that this account cannot be charged on 
 
-## Checkout
+# Group Checkout
+Will be empty for alpha version of api
++ coupons
 
+# Group Subscription
+add / change
+renewal
+change credit card
+freeze and unfreezing account
+sub accounts allowed
 
-
-recipe
-/edit
-/delete
-/add
-/is complex
-/recipeIdByWeekday
-/nutrition
-/change image
-
-/:id
-/directions
-
-/directions/complex
-
-/ingredients
-/ingredients/categorized
+This version is not allowing to manage ingredients.
+Add recipes or manage them properly.
+Its build for a purpose to show
 
 
-/meta
-prep
-cook
-serving
+
+
 
 /mealdone/:id
 /add
@@ -195,8 +310,13 @@ menu/ingredients/category/all/raw
 
 
 ## Authentification [/authentication]
-
 ## Login [/login]
+
+X-MealPlan-App-ID: app-id
+X-MealPlan-App-Key: app-key
+
+
+
 
 [{
     "success" : false,
@@ -252,6 +372,21 @@ It is worth noting that not every API call requires the Authorization header to 
 
 Generally, you'll want to pass authentication information to api2.bigoven.com whenever you're doing something on the user's behalf, like posting a review, or fetching the profile of the currently logged in user. General operations, like searching recipes, don't require user-level authentication. Remember that the user information you're passing isn't your user information as a developer, it's that of the user, which you collect in a login dialog and then Base64-it as above to pass to BigOven.com for authentication.
 
+## Images
+
+Stealed from Big Oven API
+You can easily generate a square image size for any photo simply by appending the parameters h and w, such as:
+
+Url Size
+"https://photos.bigoven.com/recipe/hero/avocado-tomato-salad-534a1f.jpg" "full"
+"https://photos.bigoven.com/recipe/hero/avocado-tomato-salad-534a1f.jpg?h=64&w=64" "64px by 64px square"
+"https://photos.bigoven.com/recipe/hero/avocado-tomato-salad-534a1f.jpg?h=128&w=128" "128px by 128px square"
+
+## Error Codes
+
+400 – Bad Request
+409 – API Rate Limit Exceeded
+500 – Internal Server Error
 
 
 ## Questions Collection [/questions]
