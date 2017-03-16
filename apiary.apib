@@ -33,6 +33,94 @@ Custom
 Get collections
 
 
+
+
+
+Generate Meal Plan
+Generate a meal plan with three meals per day (breakfast, lunch, and dinner).
+URL PARAMETERS
+
+--------
+diet
+STRING
+
+vegetarian
+Enter a diet that the meal plan has to adhere to, e.g. "vegetarian", "vegan", "paleo" etc.
+---------
+exclude
+STRING
+
+shellfish, olives
+A comma-separated list of allergens or ingredients that must be excluded.
+----------
+targetCalories
+NUMBER
+
+2000
+What is the caloric target for one day? The meal plan generator will try to get as close as possible to that goal.
+----------
+timeFrame
+STRING
+
+day
+Either for one 'day' or an entire 'week'.
+---------
+
+https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/mealplans/generate
+
+{
+  "meals": [
+    {
+      "id": 49993,
+      "title": "Cream Cheese Banana Nut Bread",
+      "readyInMinutes": 90,
+      "image": "cream-cheese-banana-nut-bread-2-49993.jpg",
+      "imageUrls": [
+        "cream-cheese-banana-nut-bread-2-49993.jpg",
+        "cream_cheese_banana_nut_bread-49993.jpg"
+      ]
+    },
+    {
+      "id": 537176,
+      "title": "Leftover Rice Casserole",
+      "readyInMinutes": 45,
+      "image": "leftover-rice-casserole-537176.jpg",
+      "imageUrls": [
+        "leftover-rice-casserole-537176.jpg"
+      ]
+    },
+    {
+      "id": 116679,
+      "title": "Leek & Cheese Pie",
+      "readyInMinutes": 75,
+      "image": "leek-amp-cheese-pie-2-116679.jpg",
+      "imageUrls": [
+        "leek-amp-cheese-pie-2-116679.jpg",
+        "leek_amp_cheese_pie-116679.jpg"
+      ]
+    }
+  ],
+  "nutrients": {
+    "calories": 1988,
+    "protein": 55.64,
+    "fat": 121.19,
+    "carbohydrates": 177.96
+  }
+
+
+
+### Sound interesting
+https://market.mashape.com/spoonacular/recipe-food-nutrition#convert-amounts
+
+but for later api stages
+
+## like search we need
+
+
+
+
+
+
 # Group Auth
 
 
@@ -142,6 +230,14 @@ Get collections
 
 
 
+Create a new recipe ingredient
+Update a recipe ingredient
+Retrieve a recipe ingredient
+Retrieve all recipe ingredients
+Delete a recipe ingredient
+
+
+
 ### Recipe Meta [GET]
 /meta
 + Response 200 (application/json)
@@ -154,6 +250,24 @@ Get collections
                 
             }
         ]
+
+
+
+
+Copying and scaling a recipe
+If you have an existing recipe that you want to copy or scale up, you can do that as well. 
+Copying and scaling use the same endpoint - copying is just scaling by a factor of 1. 
+Each recipe ingredient quantity will be scaled by the amount you specify (or default to 1), as will the recipe yield.
+To maintain per serving nutrition data between the original and new recipes, recipe packages are scaled up as well. 
+Recipe cost data will carry over as well.
+
+POST https://recipal.com/api/v1/recipes/{RECIPE_ID}/scale
+
+The ReciPal API is organized around REST. Our API is designed to have predictable, resource-oriented URLs and to use HTTP status codes to indicate responses. We use built-in HTTP features, like HTTP authentication and HTTP verbs, which can be understood by off-the-shelf HTTP clients. JSON will be returned in all responses from the API, including errors.
+Interacting with the API should be straightforward with standard HTTP libraries, but let us know if you'd be interested in writing a language-specific client library. We'd be happy to facilitate that process.
+If you ever have any questions, concerns, or run into errors please don't hesitate to contact us at info@recipal.com.
+
+
 
 
 
@@ -523,6 +637,20 @@ example
 ## Price
 ## How much spend now
 ## Previous purchased items  + edit prev
+
+
+
+POST [/grocerylist/department]    Departmentalize a list of strings -- used for ad-hoc grocery list item addition
+DELETE [/grocerylist]             Delete all the items on a grocery list; faster operation than a sync with deleted items.
+GET [/grocerylist]                Get the user's grocery list. User is determined by Basic Authentication.
+POST [/grocerylist/recipe]        Add a Recipe to the grocery list. In the request data, pass in recipeId, scale (scale=1.0 says to keep the recipe the same size as originally posted), markAsPending (true/false) to indicate that the lines in the recipe should be marked in a "pending" (unconfirmed by user) state.
+POST [/grocerylist/sync]          Synchronize the grocery list. Call this with a POST to /grocerylist/sync
+POST [/grocerylist/item]          Add a single line item to the grocery list
+DELETE [/grocerylist/item/{guid}] [/grocerylist/item/{guid}] DELETE will delete this item assuming you own it.
+PUT [/grocerylist/item/{guid}]    Update a grocery item by GUID
+
+
+
 
 # Group Recipe Calendar
 
