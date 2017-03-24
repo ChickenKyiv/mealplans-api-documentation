@@ -273,6 +273,405 @@ If you ever have any questions, concerns, or run into errors please don't hesita
 
 
 
+
+
+
+
+## Recipe Collection [/recipes]
+### Create a recipe [POST]
+Create a recipe resource and receive the CO₂-Value and Eaternity Award. Example of a full request with all fields used:
++ Request (application/json)
+        {   
+            "recipe": {
+                "titles": [
+                    {
+                        "language": "de",
+                        "value": "Kürbisrisotto"
+                    },
+                    {
+                        "language": "en",
+                        "value": "Pumpkin Risotto"
+                    }],
+                "author": "Eckart Witzigmann",
+                "date": "2013-10-14",   
+                "location": "Zürich Schweiz",
+                "servings": 140,
+                "instructions": [
+                        {
+                            "language": "de",
+                            "value": "Den Karottenkuchen im Ofen backen und noch warm geniessen."
+                        },
+                        {
+                            "language": "en",
+                            "value": "Bake the carrot cake in the oven and enjoy as still hot."
+                        }],
+                "ingredients": [
+                    {
+                    "id": "100100191",
+                    "type": "conceptual-ingredients",
+                    "names":  [
+                        {
+                            "language": "de",
+                            "value": "Tomaten"
+                        },
+                        {
+                            "language": "en",
+                            "value": "Tomatoes"
+                        }],
+                    "amount": 150,
+                    "unit": "gram",
+                    "origin": "spain",
+                    "transport": "air",
+                    "production": "greenhouse",
+                    "processing": "raw",
+                    "conservation": "fresh",
+                    "packaging": "plastic",  
+                    "gtin": 00012345678905
+                    },
+                    {
+                    "id": "100100894",
+                    "type": "conceptual-ingredients",
+                    "names":  [
+                        {
+                            "language": "de",
+                            "value": "Zwiebeln"
+                        },
+                        {
+                            "language": "en",
+                            "value": "Onions"
+                        }],
+                    "amount": 78,
+                    "unit": "gram",
+                    "origin": "france",
+                    "transport": "ground",
+                    "production": "organic",
+                    "processing": "",
+                    "conservation": "dried",
+                    "packaging": "",  
+                    "gtin": 00012345678906
+                    }
+                ]
+            }
+        }
++ Response 200 (application/json)
+    + Headers
+    
+            Location: https://co2.eaternity.ch/api/recipes/d1ed2263-b1b2-4f50-9e9d-ba62cae81f29
+            
+    + Body
+    
+            {
+                "recipe": {
+                    "id": "d1ed2263-b1b2-4f50-9e9d-ba62cae81f29",
+                    "co2-value": 765,
+                    "info-text": "Two ingredient origins have been estimated.",
+                    "eaternity-award": false,
+                    "rating": "B"
+                }   
+            }
+## Recipe [/recipes/{id}]
+            
+            
+### Get Recipe [GET]
+Get the up-to-date CO₂-Value for this recipe for the current date
++ Response 200 (application/json)
+        {   
+            "recipe": {
+                "id": "d1ed2263-b1b2-4f50-9e9d-ba62cae81f29",
+                "co2-value": 765,
+                "info-text": "Two ingredient origins have been estimated.",
+                "eaternity-award": false,
+                "rating": "B",
+                "titles": [
+                    {
+                        "language": "de",
+                        "value": "Kürbisrisotto"
+                    },
+                    {
+                        "language": "en",
+                        "value": "Pumpkin Risotto"
+                    }],
+                "author": "Eckart Witzigmann",
+                "date": "2013-10-14",   
+                "location": "Zürich Schweiz",
+                "servings": 140,
+                "instructions": [
+                    {
+                        "language": "de",
+                        "value": "Den Karottenkuchen im Ofen backen und noch warm geniessen."
+                    },
+                    {
+                        "language": "en",
+                        "value": "Bake the carrot cake in the oven and enjoy as still hot."
+                    }],
+                "ingredients": [
+                    {
+                    "id": "100100191",
+                    "type": "conceptual-ingredients",
+                     "names":  [
+                        {
+                            "language": "de",
+                            "value": "Tomaten"
+                        },
+                        {
+                            "language": "en",
+                            "value": "Tomatoes"
+                        }],
+                    "amount": 150,
+                    "unit": "gram",
+                    "origin": "spain",
+                    "transport": "air",
+                    "production": "greenhouse",
+                    "processing": "raw",
+                    "conservation": "fresh",
+                    "packaging": "plastic",  
+                    "rating": "b",
+                    "bar-chart": 31.00
+                    },
+                    {
+                    "id": "100100894",
+                    "type": "conceptual-ingredients",
+                    "names":  [
+                        {
+                            "language": "de",
+                            "value": "Zwiebeln"
+                        },
+                        {
+                            "language": "en",
+                            "value": "Onions"
+                        }],
+                    "amount": 78,
+                    "unit": "gram",
+                    "origin": "france",
+                    "transport": "ground",
+                    "production": "organic",
+                    "processing": "",
+                    "conservation": "dried",
+                    "packaging": "",  
+                    "rating": "c",
+                    "bar-chart": 69.00
+                    }
+                ]
+            }
+        }
+### Update or create new recipe [PUT]
+Update or create a certain recipe with this id. The whole recipe resource with all ingredients must be provided again. (PUT overrides the existing resource).
+  
++ Request (application/json)
+        {   
+            "recipe": {
+                "titles": [
+                    {
+                        "language": "de",
+                        "value": "Kürbisrisotto"
+                    }],
+                "author": "Eckart Witzigmann",
+                "date": "2013-10-14",   
+                "location": "Zürich Schweiz",
+                "servings": 140,
+                "instructions": [
+                        {
+                            "language": "de",
+                            "value": "Den Karottenkuchen im Ofen backen und noch warm geniessen."
+                        },
+                        {
+                            "language": "en",
+                            "value": "Bake the carrot cake in the oven and enjoy as still hot."
+                        }],
+                "ingredients": [
+                    {
+                    "id": "100100191",
+                    "type": "conceptual-ingredients",
+                    "names":  [
+                        {
+                            "language": "de",
+                            "value": "Tomaten"
+                        }],
+                    "amount": 150,
+                    "unit": "gram",
+                    "origin": "spain",
+                    "transport": "air",
+                    "production": "greenhouse",
+                    "processing": "raw",
+                    "conservation": "fresh",
+                    "packaging": "plastic"  
+                    },
+                    {
+                    "id": "100100894",
+                    "type": "conceptual-ingredients",
+                    "names":  [
+                        {
+                            "language": "de",
+                            "value": "Zwiebeln"
+                        }],
+                    "amount": 78,
+                    "unit": "gram",
+                    "origin": "france",
+                    "transport": "ground",
+                    "production": "organic",
+                    "processing": "",
+                    "conservation": "dried",
+                    "packaging": ""
+                    }
+                ]
+            }
+        }
++ Response 200 (application/json)
+            {
+                "recipe": {
+                    "id": "d1ed2263-b1b2-4f50-9e9d-ba62cae81f29",
+                    "co2-value": 765,
+                    "info-text": "Two ingredient origins have been estimated.",
+                    "eaternity-award": false,
+                    "rating": "B"
+                }   
+            }
+            
+            
+### Delete the recipe [DELETE]
+Deletes this recipe from the server
++ Response 204
+## Kitchen Recipe Collection [/kitchens/{kitchen_id}/recipes]
+No recipe location needs to be provided.
+### Create a recipe [POST]
+Create a recipe resource in a specific kitchen and receive the CO₂-Value and Eaternity Award 
++ Request (application/json)
+        {   
+            "recipe": {
+                "titles": [
+                    {
+                        "language": "de",
+                        "value": "Kürbisrisotto"
+                    }],
+                "author": "Eckart Witzigmann",
+                "date": "2013-10-14",   
+                "location": "Zürich Schweiz",
+                "servings": 140,
+                "instructions": [
+                    {
+                        "language": "de",
+                        "value": "Den Karottenkuchen im Ofen backen und noch warm geniessen."
+                    },
+                    {
+                        "language": "en",
+                        "value": "Bake the carrot cake in the oven and enjoy as still hot."
+                    }],
+                "ingredients": [
+                    {
+                    "id": "100100191",
+                    "type": "conceptual-ingredients",
+                    "names":  [
+                        {
+                            "language": "de",
+                            "value": "Tomaten"
+                        }],
+                    "amount": 150,
+                    "unit": "gram",
+                    "origin": "spain",
+                    "transport": "air",
+                    "production": "greenhouse",
+                    "processing": "raw",
+                    "conservation": "fresh",
+                    "packaging": "plastic"
+                    },
+                    {
+                    "id": "100100894",
+                    "type": "conceptual-ingredients",
+                    "names":  [
+                        {
+                            "language": "de",
+                            "value": "Zwiebeln"
+                        }],
+                    "amount": 78,
+                    "unit": "gram",
+                    "origin": "france",
+                    "transport": "ground",
+                    "production": "organic",
+                    "processing": "",
+                    "conservation": "dried",
+                    "packaging": ""
+                    }
+                ]
+            }
+        }
++ Response 200 (application/json)
+ed
+    + Headers
+            Location: https://co2.eaternity.ch/api/kitchens/45674/recipes/d1ed2263-b1b2-4f50-9e9d-ba62cae81f29
+    + Body
+        
+            {
+                "recipe": {
+                    "id": "d1ed2263-b1b2-4f50-9e9d-ba62cae81f29",
+                    "kitchen-id": "45674",
+                    "co2-value": 765,
+                    "info-text": "Two ingredient origins have been estimated.",
+                    "eaternity-award": false,
+                    "rating": "B"
+                }   
+            }
+            
+            
+### Get all recipes contained in this kitchen [GET]
+A list of recipe ids is returned.
++ Response 200 (application/json)
+        {
+            "recipes": [ "298374","298345","298454","298345","298456","294564" ]
+        }
+## Kitchen Recipe [/kitchens/{kitchen_id}/recipes/{recipe_id}]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+##Recipe Properties
+| Property | Type  | Description      | Required |
+|:----------|:--------|:------------------|----------|
+|kitchen-id|string|the id of the kitchen the recipe belongs to.|yes for the /recipes/batch resource|
+|titles| list of language object| title of the recipe in different languages (array of language objects)|no|
+|author|string|original author of the recipe|no|
+|date|yyyy-mm-dd|the date the recipe is served. If **no date** is provided, **only a rating** of the recipe is returned.|best practice|
+|location|string|location where the recipe is cooked. Address or country (arbitrary format) |yes if recipe is not provided in a kitchen|
+|servings|int|for how many servings the ingredients are given. Required for the evaluation of the Eaternity Award.|yes for the Eaternity Award|
+|instructions|list of language objects|cooking instructions for the recipe in different languages (array of language objects)|   no|
+|ingredients|list of ingredients|a list of all ingredient resources in this recipe |yes|
+|**Response**||||
+|id|string|the id of the recipe. Either generated by Eaternity or supplied by the client through a PUT||
+|co2-value|int|the CO₂-Value of the whole recipe per serving in [g CO₂e / serving]. If no date is provided, no CO₂-Value but only the rating is returned. If no servings are given, we assume 1 serving.||
+|info-text| string | notes on the calculated recipe CO₂-value, e.g. remarks when properties like origin or transport are estimated||
+|eaternity-award|boolean|true if the CO₂-Value of the recipe is climate friendly, false otherwise | |
+|rating|string|the CO₂-recipe rating [A,B,C,D,E]. A is best, E is worst.| .|
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 example
 
 
