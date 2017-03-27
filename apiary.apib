@@ -164,7 +164,7 @@ but for later api stages
             }
         ]
 
-### Is Complex Recipe  [/recipe/{recipe_id}/is_complex]
+### Is Complex Recipe [GET] [/recipe/{recipe_id}/is_complex]
 
 + Response 200 (application/json)
 
@@ -206,11 +206,11 @@ but for later api stages
 
 
 
-/recipeIdByWeekday - maybe this is belong more to weekly menu
+## /recipeIdByWeekday - maybe this is belong more to weekly menu
 
-/nutrition
+## /nutrition
 
-/change image only
+## /change image only
 
 ### Delete [DELETE]
 + /delete
@@ -1050,85 +1050,6 @@ PUT [/grocerylist/item/{guid}]    Update a grocery item by GUID
 
 
 
-
-# Group Recipe Calendar
-
-All data in recipe calendar are related to Grocery list, so maybe it will be better to move it on appropriate secion
-
-Current week
-Current
-Previous week
-Next week (is available)
-
-
-# Group Expenses
-
-Will be empty for alpha version of api
-
-# Group Nutrition
-
-
-# Group Food Tracking
-Will be empty for alpha version of api
-
-# Group Search
-By Ingredient
-By Name
-By easy
-By cousin
-
-# Group Tips
-Will be empty for alpha version of api
-
-# Group Logs
-Will be empty for alpha version of api
-
-names for items
-cup/cups/teaspoon
-
-# Group User
-profile
-like/fav/meal done
-purchase history
-
-# Group Gift certificate
-Will be empty for alpha version of api
-Allowing user to pay for subscription but not
-Might works as same as coupons, but with price going to 0.
-Problem of gift certificate is that this account cannot be charged on 
-
-# Group Checkout
-Will be empty for alpha version of api
-+ coupons
-
-# Group Subscription
-add / change
-renewal
-change credit card
-freeze and unfreezing account
-sub accounts allowed
-
-This version is not allowing to manage ingredients.
-Add recipes or manage them properly.
-Its build for a purpose to show
-
-
-
-
-
-/mealdone/:id
-/add
-/delete
-/list  - return recipe ids only
-
-
-favorite
-/add
-/:id
-/delete
-/list  - return recipe ids only
-
-
 weekly menu
  /recipe/edit
  /recipe/delete
@@ -1149,9 +1070,6 @@ mealDone
 favorites
 getMeta
 
-
-isComplexRecipe - это 
-getRecipeId by weekday
 
 
 
@@ -1197,34 +1115,8 @@ menu/ingredients/category/all/raw
 
 
 
-## Authentification [/authentication]
-## Login [/login]
 
-X-MealPlan-App-ID: app-id
-X-MealPlan-App-Key: app-key
-
-
-
-
-[{
-    "success" : false,
-    "message" : "Authentification failed"
-}]
-
-[{
-    success: true,
-    message: 'Enjoy your token!',
-    token: token
-}]
-
-Status 303
-[{ 
-    success: false, 
-    message: 'No token provided.' 
-}]
-
-
-Stealed from BigOven API
+## Stealed from BigOven API
 
 Authentication Process
 SSL is now required for all requests to the BigOven API. So precede your requested endpoint with "https://api2.bigoven.com"
